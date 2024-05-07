@@ -15,5 +15,14 @@ if __name__ == '__main__':
         squat = Exercise(name="Squats", sets=5, reps=10)
         bench_press = Exercise(name="Bench Press", sets=5, reps=5)
         deadlift = Exercise(name="Deadlift", sets=2, reps=4)
-        db.session.add_all([squat, bench_press, deadlift])
+    
+
+        push_routine.exercises.append(squat)
+        push_routine.exercises.append(deadlift)
+
+        leg_routine.exercises.append(squat) 
+        leg_routine.exercises.append(deadlift) 
+
+
+        db.session.add_all([push_routine, pull_routine, leg_routine, squat, bench_press, deadlift])
         db.session.commit()
