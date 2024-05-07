@@ -1,1 +1,16 @@
 just getting things started
+
+
+FRONTEND
+cd frontend    
+npm start
+
+BACKEND
+
+Creating a backend with flask SQLAlchemy
+Create virtual environment
+pipenv install or pipenv --pyhton=3.8.13
+
+install flask application
+pipenv install flask ipdb
+** check Pipenv to ensure creation
