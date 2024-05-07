@@ -30,7 +30,7 @@ BACKEND
 Creating a backend with flask SQLAlchemy
 
 Create virtual environment (terminal)
-pipenv install or pipenv --pyhton=3.8.13
+pipenv install or pipenv --python=3.8.13
 
 install flask application (terminal)
 pipenv install flask ipdb
@@ -70,9 +70,11 @@ export FLASK_DEBUG=true
 
 Start the server back up
 ANYTIME YOU EXIT THE VIRTUAL ENVIRONMENT, MUST SET ENVIRONMENT VARIABLES AGAIN
+cd server
+
 FLASK_APP=app.py
-FLASK_RUN_PORT=5555 flask run
 export FLASK_DEBUG=true
+FLASK_RUN_PORT=5555 flask run
 
 Create a basic test route (app.py)
 from flask import make_response
@@ -180,6 +182,9 @@ from models.exercises import Exercise
 
 if __name__ == '__main__':
     with app.app_context():
+        Exercise.query.delete()
+        db.session.commit()
+
         bench = Exercise(name="bench")
         deadlift = Exercise(name="deadlift")
         db.session.add_all([bench, deadlift])
