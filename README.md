@@ -237,6 +237,13 @@ Input this into text box
 
 Press SEND!
 
+MIGRATION ISSUES
+delete aardvark.db and migrations folder
+in server in terminal
+flask db init
+flask db migrate -m "some name"
+flask db upgrade
+
 
 
 
