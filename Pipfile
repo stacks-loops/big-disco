@@ -6,19 +6,11 @@ name = "pypi"
 [packages]
 flask = "*"
 ipdb = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
 python_full_version = "3.8.13"
-
-Open shell
-pipenv shell
-
-Check flask is working (commands wil not run yet)
-flask
-
-Make server directory
-mkdir server
-cd server

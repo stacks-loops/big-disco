@@ -24,6 +24,7 @@ FRONTEND
 cd frontend    
 npm start
 
+
 BACKEND
 
 Creating a backend with flask SQLAlchemy
@@ -34,6 +35,16 @@ pipenv install or pipenv --pyhton=3.8.13
 install flask application (terminal)
 pipenv install flask ipdb
 ** check Pipenv file to ensure creation
+
+Open shell
+pipenv shell
+
+Check flask is working (commands wil not run yet)
+flask
+
+Make server directory
+mkdir server
+cd server
 
 Create app.py and config file(terminal)
 touch app.py config.py
@@ -62,3 +73,44 @@ ANYTIME YOU EXIT THE VIRTUAL ENVIRONMENT, MUST SET ENVIRONMENT VARIABLES AGAIN
 FLASK_APP=app.py
 FLASK_RUN_PORT=5555 flask run
 export FLASK_DEBUG=true
+
+Create a basic test route (app.py)
+from flask import make_response
+from config import app
+
+@app.route('/exercises', methods=['GET'])
+def exercises():
+    #finding all
+    return make_response('all exercises shown here')
+
+Go to Postman and make a get request to http://localhost:5555/exercises
+
+GOOD JOB!!
+
+Let's get into Flask SQLAlchemy library that will give us access to those methods
+This way our classes can inherit methods
+Press ctrl C
+In virtual enviornment in server
+pipenv install flask-sqlalchemy
+
+Create a new SQLAlchemy instance (config.py)
+Added
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy
+
+New
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aardvark.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy()
+
+Any datbase can be used i.e. Postgres
+
+Install migrate library(terminal)
+pipenv install flask-migrate
+
