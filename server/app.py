@@ -7,5 +7,7 @@ from models.exercises import Exercise
 
 @app.route('/exercises', methods=['GET'])
 def exercises():
-    ipdb.set_trace()
-    return make_response('all exercises shown here')
+    all_exercise_instances = Exercise.query.all()
+    exercises_dict = [exercises.to_dict() for exercises in all_exercise_instances]
+
+    return make_response(exercises_dict)
