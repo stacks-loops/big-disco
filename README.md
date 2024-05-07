@@ -193,3 +193,50 @@ if __name__ == '__main__':
 Run the file using python (in server directory in terminal)
 python seed.py
 
+
+
+Update app.py with this code to retrieve a dictionary of exercises
+from flask import make_response, request
+from config import app, db
+
+import ipdb
+
+from models.exercises import Exercise
+
+@app.route('/exercises', methods=['GET', 'POST'])
+def exercises():
+    if request.method == 'GET':
+        all_exercise_instances = Exercise.query.all()
+        exercises_dict = [exercises.to_dict() for exercises in all_exercise_instances]
+
+        return make_response(exercises_dict)
+
+    elif request.method == 'POST':
+        params = request.json
+        new_exercise = Exercise(name=params["name"])
+
+        db.session.add(new_exercise)
+        db.session.commit()
+        return make_response(new_exercise.to_dict(), 201)
+
+In exercises.py add this to create the to_dict method so we do not have to input every time.
+This goes under the name column creation line
+
+def to_dict(self):
+        return {'id': self.id, 'name': self.name}
+
+Open Postman again and change to POST request (which is to add not retreive)
+Input our endpoint http://localhost:5555/exercises
+Press headers below the input bar and add Content-Type in "Key" column and "application/json" in value
+To the right of headers select "Body"
+Change to "raw" and ensure the far right dropdown is set to JSON in blue
+Input this into text box
+{
+    "name" : "pullup"
+}
+
+Press SEND!
+
+
+
+
