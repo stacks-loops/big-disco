@@ -165,7 +165,7 @@ class Exercise(db.Model):
     name = db.Column(db.String)
     
 --
-then...
+then... this is all done JUST IN SERVER NO SHELL OR ANYTHING
 
 flask db migrate -m "create Activity table"
 
