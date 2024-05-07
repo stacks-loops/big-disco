@@ -114,3 +114,11 @@ Any datbase can be used i.e. Postgres
 Install migrate library(terminal)
 pipenv install flask-migrate
 
+Check flask to ensure db is available
+use flask shell to test within your application
+
+CREATE A CLASS
+
+New folder models
+New file exercises.py
+
