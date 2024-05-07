@@ -122,3 +122,54 @@ CREATE A CLASS
 New folder models
 New file exercises.py
 
+Here is exercises.py
+from config import db
+import ipdb
+
+# class Exercises(db.Model):
+#     pass
+
+class Test:
+    def goofin(self):
+        print('goofin off')
+
+class Activity(Test):
+    __tablename__ = 'Activities'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    age = db.Column(db.Integer)
+
+ipdb.set_trace()
+
+When we want to create a new migration repository we use the init command in db
+
+Delete the ipdb line in exercises.py server in terminal 
+flask db init
+
+This should create an instance and migrations folder
+
+Now we use the migrate command to generate a revision file. When we make changes to models
+that are used by app.py make a commit sort of. In virtual env and in server.
+Delete the testing code and use this in exercises.py
+--
+from config import db
+import ipdb
+
+class Exercise(db.Model):
+    __tablename__ = 'Exercises'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    
+--
+then...
+
+flask db migrate -m "create Activity table"
+
+Can view the db by right clicking > "Open With" SQLite Explor OR SQLite Viewer
+
+update the database(terminal)
+flask db upgrade
+
+
