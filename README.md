@@ -172,4 +172,19 @@ Can view the db by right clicking > "Open With" SQLite Explor OR SQLite Viewer
 update the database(terminal)
 flask db upgrade
 
+Create seed.py file in the server folder
+
+seed.py
+from config import app, db
+from models.exercises import Exercise 
+
+if __name__ == '__main__':
+    with app.app_context():
+        bench = Exercise(name="bench")
+        deadlift = Exercise(name="deadlift")
+        db.session.add_all([bench, deadlift])
+        db.session.commit()
+
+Run the file using python (in server directory in terminal)
+python seed.py
 
