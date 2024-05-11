@@ -45,7 +45,7 @@ function DinoForm() {
         >
         {({ values }) => (
             <Form>
-                <Field type="text" name="title" placeholder="Workout Title" />
+                <Field type="text" name="title" placeholder="Loop Name" />
 
                 <FieldArray name="steps">
                     {({ push, remove }) => (
