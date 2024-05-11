@@ -1,6 +1,8 @@
-import { configureStore } from 'redux'
-import rootReducer from './reducers'
+import { configureStore } from '@reduxjs/toolkit'
+import exercisesReducer from './features/exercisesSlice'
 
-const store = configureStore(rootReducer)
-
-export default store;
+export default configureStore({
+    reducer: {
+        exercises: exercisesReducer,
+    },
+})
