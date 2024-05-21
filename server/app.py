@@ -2,7 +2,7 @@ from flask import Flask, make_response, request
 from config import app, db
 from flask_cors import CORS
 
-CORS(app)
+CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
 
 import ipdb
 

@@ -39,7 +39,7 @@ pipenv install flask ipdb
 Open shell
 pipenv shell
 
-Check flask is working (commands wil not run yet)
+Check flask is working (commands will not run yet)
 flask
 
 Make server directory

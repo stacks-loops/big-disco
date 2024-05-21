@@ -46,6 +46,11 @@ function DinoForm() {
         <Formik 
         initialValues={initialFormData}
         onSubmit={(values) => {
+            const newExercise = {
+                name: values.steps[0].exerciseName,
+                sets: values.steps[0].sets,
+                reps: values.steps[0].reps,
+            }
             dispatch(createExercise(values))
         }}
         >
