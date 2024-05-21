@@ -2,6 +2,8 @@ import React from 'react'
 import { Formik, Form, Field, FieldArray } from 'formik'
 import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { createExercise } from './exercisesSlice'
 
 const workoutStepSchema = Yup.object().shape({
     exerciseName: Yup.string().required('Exercise name is required'),
@@ -38,14 +40,18 @@ const workoutStep = {
 }
 
 function DinoForm() {
+    const dispatch = useDispatch()
+
     return (
         <Formik 
         initialValues={initialFormData}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+            dispatch(createExercise(values))
+        }}
         >
         {({ values }) => (
             <Form>
-                <Field type="text" name="title" placeholder="Loop Name" />
+                <Field type="text" name="title" placeholder="Loop Name Title" />
 
                 <FieldArray name="steps">
                     {({ push, remove }) => (

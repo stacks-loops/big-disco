@@ -26,3 +26,26 @@ def exercise_by_id(id):
     found_exercise = Exercise.query.get(id)
     return make_response(found_exercise.to_dict())
 
+@app.route('/exercises/<int:id>', methods=['PUT'])
+def update_exercise(id):
+    found_exercise = Exercise.query.get(id)
+    if not found_exercise:
+        return make_response({'error': 'Exercise not  found'}, 404)
+    
+    params = request.json
+    found_exercise.name = params.get("name") #update only provided fields name
+
+    db.session.commit()
+    return make_response(found_exercise.to_dict(), 200)
+
+@app.route('/exercises/<int:id>', methods=['DELETE'])
+def delete_exercise(id):
+    found_exercise = Exercise.query.get(id)
+    if not found_exercise:
+        return make_response({'error': 'Exercise not found'}, 404)
+    
+    db.session.delete(found_exercise)
+    db.session.commit()
+    return make_response({}, 204) #no content on delete success
+
+
