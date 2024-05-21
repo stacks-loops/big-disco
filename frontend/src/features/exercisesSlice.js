@@ -1,29 +1,42 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 // basic structure for fetch called async thunk
-export const fetchExercises = createAsyncThunk('exercises/fetchExercises', async () => {
-    const response = await fetch('/exercises')
-    const data = await response.json()
-    return data;
-})
+export const fetchExercises = createAsyncThunk(
+    'exercises/fetchExercises',
+    async () => {
+        try {
+            const response = await fetch('/exercises')
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.error('Error fetching exercises', error)
+        }
+    }
+)
 //creating new one
 export const createExercise = createAsyncThunk(
     'exercises/createExercise', 
     async (newExercise) => {
-        const response = await fetch('/exercises', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newExercise)
-    })
-    if (response.ok) {
-        const data = await response.json()
-        return data
-    } else {
-        throw new Error('Error creating a new exercise')
+        try {
+            const response = await fetch('http://localhost:5000/exercises', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newExercise)
+            })
+            if (!response.ok) {
+                throw new Error('Error creating a new exercise')
+            }
+
+            const data = await response.json()
+            return data;
+            } catch (error) {
+                console.error('Error creating exercise', error)
+
+        }
     }
-})
+)
 
 // async thunk for updating
 export const updateExercise = createAsyncThunk(
