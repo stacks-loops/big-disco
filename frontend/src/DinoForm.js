@@ -3,7 +3,7 @@ import { Formik, Form, Field, FieldArray } from 'formik'
 import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
-import { createExercise } from './exercisesSlice'
+import { createExercise } from './features/exercisesSlice'
 
 const workoutStepSchema = Yup.object().shape({
     exerciseName: Yup.string().required('Exercise name is required'),
@@ -58,14 +58,24 @@ function DinoForm() {
                         <div>
                             {values.steps.map((step, index) => (
                                 <div key={step.id}>
-                                    <Field type="text" name={`steps[${index}].exerciseName`} placeholder="Exercise Name" />
-                                    <Field as="select" name={`steps[${index}].intervalType`}>
+                                    <Field 
+                                    type="text" 
+                                    name={`steps[${index}].exerciseName`} 
+                                    placeholder="Exercise Name" 
+                                    value={values.steps[index].exerciseName} 
+                                    />
+                                    <Field as="select" 
+                                    name={`steps[${index}].intervalType`}
+                                    value={values.steps[index].intervalType}
+                                    >
                                         <option value="days">Days</option>
                                     </Field>
-                                    <Field type="number" name={`steps[${index}].intervalValue`} placeholder="Repeat Every.... days"/>
-
-
-
+                                    <Field 
+                                    type="number" 
+                                    name={`steps[${index}].intervalValue`} 
+                                    placeholder="Repeat Every.... days"
+                                    value={values.steps[index].intervalValue || 0}
+                                    />
 
                                     <button type="button" onClick={() => remove(index)}>Remove Step</button>
                                     </div>
